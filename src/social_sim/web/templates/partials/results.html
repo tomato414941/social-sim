@@ -1,0 +1,41 @@
+{% if stats %}
+<div class="stats-summary">
+    <h3>Results ({{ stats.steps }} steps)</h3>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-value">{{ stats.final_gini }}</span>
+            <span class="stat-label">Final Gini</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value">{{ stats.mean_wealth }}</span>
+            <span class="stat-label">Mean Wealth</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value">{{ stats.mean_happiness }}</span>
+            <span class="stat-label">Mean Happiness</span>
+        </div>
+    </div>
+</div>
+
+<div class="charts">
+    <div class="chart-container">
+        <div id="gini-chart"></div>
+    </div>
+    <div class="chart-container">
+        <div id="metrics-chart"></div>
+    </div>
+    <div class="chart-container">
+        <div id="distribution-chart"></div>
+    </div>
+</div>
+
+<script>
+    Plotly.newPlot('gini-chart', JSON.parse('{{ gini_chart | safe }}').data, JSON.parse('{{ gini_chart | safe }}').layout, {responsive: true});
+    Plotly.newPlot('metrics-chart', JSON.parse('{{ metrics_chart | safe }}').data, JSON.parse('{{ metrics_chart | safe }}').layout, {responsive: true});
+    Plotly.newPlot('distribution-chart', JSON.parse('{{ distribution_chart | safe }}').data, JSON.parse('{{ distribution_chart | safe }}').layout, {responsive: true});
+</script>
+{% else %}
+<div class="no-results">
+    <p>Configure parameters and click "Run Simulation" to see results.</p>
+</div>
+{% endif %}
