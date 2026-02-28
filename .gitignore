@@ -6,3 +6,6 @@ __pycache__/
 dist/
 build/
 .env
+.next/
+client/node_modules/
+client/dist/
