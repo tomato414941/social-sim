@@ -21,6 +21,120 @@
                 <label for="seed">Random Seed (optional)</label>
                 <input type="number" id="seed" name="seed" placeholder="Leave empty for random">
             </div>
+
+            <h3>Labor Income</h3>
+            <div class="form-group checkbox-group">
+                <label>
+                    <input type="checkbox" id="enable_income" name="enable_income" value="true" onchange="toggleIncomeOptions()">
+                    Enable Labor Income
+                </label>
+            </div>
+            <div id="income-options" class="income-options" style="display: none;">
+                <div class="form-group">
+                    <label for="base_income">Base Income per Step</label>
+                    <input type="number" id="base_income" name="base_income" value="1.0" min="0.1" max="10" step="0.1">
+                </div>
+                <p class="hint">Income = Base × Productivity (each agent has random productivity 0.5-1.5)</p>
+            </div>
+
+            <h3>Taxation & Redistribution</h3>
+            <div class="form-group checkbox-group">
+                <label>
+                    <input type="checkbox" id="enable_tax" name="enable_tax" value="true" onchange="toggleTaxOptions()">
+                    Enable Progressive Tax
+                </label>
+            </div>
+            <div id="tax-options" class="tax-options" style="display: none;">
+                <div class="form-group">
+                    <label>Tax Rates by Wealth Bracket</label>
+                    <div class="tax-brackets">
+                        <div class="bracket">
+                            <span>0-10:</span>
+                            <input type="number" name="tax_rate_1" value="0" min="0" max="100" step="1">%
+                        </div>
+                        <div class="bracket">
+                            <span>10-30:</span>
+                            <input type="number" name="tax_rate_2" value="10" min="0" max="100" step="1">%
+                        </div>
+                        <div class="bracket">
+                            <span>30-50:</span>
+                            <input type="number" name="tax_rate_3" value="20" min="0" max="100" step="1">%
+                        </div>
+                        <div class="bracket">
+                            <span>50+:</span>
+                            <input type="number" name="tax_rate_4" value="30" min="0" max="100" step="1">%
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="enable_ubi" name="enable_ubi" value="true">
+                        Distribute as UBI (Basic Income)
+                    </label>
+                </div>
+            </div>
+
+            <h3>Natural Disasters</h3>
+            <div class="form-group checkbox-group">
+                <label>
+                    <input type="checkbox" id="enable_disaster" name="enable_disaster" value="true" onchange="toggleDisasterOptions()">
+                    Enable Natural Disasters
+                </label>
+            </div>
+            <div id="disaster-options" class="disaster-options" style="display: none;">
+                <div class="form-group">
+                    <label for="disaster_probability">Disaster Probability per Step (%)</label>
+                    <input type="number" id="disaster_probability" name="disaster_probability" value="1" min="0" max="100" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="disaster_damage">Damage Rate (%)</label>
+                    <input type="number" id="disaster_damage" name="disaster_damage" value="20" min="0" max="100" step="1">
+                </div>
+                <p class="hint">When disaster occurs, all agents lose this % of their wealth</p>
+            </div>
+
+            <h3>Education Investment</h3>
+            <div class="form-group checkbox-group">
+                <label>
+                    <input type="checkbox" id="enable_education" name="enable_education" value="true" onchange="toggleEducationOptions()">
+                    Enable Education Investment
+                </label>
+            </div>
+            <div id="education-options" class="education-options" style="display: none;">
+                <div class="form-group">
+                    <label for="education_rate">Investment Rate (%)</label>
+                    <input type="number" id="education_rate" name="education_rate" value="10" min="0" max="100" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="max_productivity">Max Productivity</label>
+                    <input type="number" id="max_productivity" name="max_productivity" value="3.0" min="1" max="10" step="0.1">
+                </div>
+                <p class="hint">Agents invest wealth to increase productivity (diminishing returns)</p>
+            </div>
+
+            <script>
+                function toggleIncomeOptions() {
+                    var checkbox = document.getElementById('enable_income');
+                    var options = document.getElementById('income-options');
+                    options.style.display = checkbox.checked ? 'block' : 'none';
+                }
+                function toggleTaxOptions() {
+                    var checkbox = document.getElementById('enable_tax');
+                    var options = document.getElementById('tax-options');
+                    options.style.display = checkbox.checked ? 'block' : 'none';
+                }
+                function toggleDisasterOptions() {
+                    var checkbox = document.getElementById('enable_disaster');
+                    var options = document.getElementById('disaster-options');
+                    options.style.display = checkbox.checked ? 'block' : 'none';
+                }
+                function toggleEducationOptions() {
+                    var checkbox = document.getElementById('enable_education');
+                    var options = document.getElementById('education-options');
+                    options.style.display = checkbox.checked ? 'block' : 'none';
+                }
+            </script>
+
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Run Simulation</button>
                 <button type="button" class="btn btn-secondary" hx-post="/reset" hx-target="#results" hx-swap="innerHTML">Reset</button>

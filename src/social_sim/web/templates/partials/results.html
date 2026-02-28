@@ -14,6 +14,40 @@
             <span class="stat-value">{{ stats.mean_happiness }}</span>
             <span class="stat-label">Mean Happiness</span>
         </div>
+        {% if stats.income_enabled %}
+        <div class="stat-card">
+            <span class="stat-value">{{ stats.total_income }}</span>
+            <span class="stat-label">Total Income</span>
+        </div>
+        {% endif %}
+        {% if stats.tax_enabled %}
+        <div class="stat-card">
+            <span class="stat-value">{{ stats.tax_revenue }}</span>
+            <span class="stat-label">Tax Revenue</span>
+        </div>
+        {% endif %}
+        {% if stats.ubi_enabled %}
+        <div class="stat-card">
+            <span class="stat-value">{{ stats.ubi_amount }}</span>
+            <span class="stat-label">UBI per Person</span>
+        </div>
+        {% endif %}
+        {% if stats.disaster_enabled %}
+        <div class="stat-card">
+            <span class="stat-value">{{ stats.disaster_count }}</span>
+            <span class="stat-label">Disasters</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value">{{ stats.total_disaster_damage }}</span>
+            <span class="stat-label">Total Damage</span>
+        </div>
+        {% endif %}
+        {% if stats.education_enabled %}
+        <div class="stat-card">
+            <span class="stat-value">{{ stats.mean_productivity }}</span>
+            <span class="stat-label">Mean Productivity</span>
+        </div>
+        {% endif %}
     </div>
 </div>
 
@@ -27,12 +61,28 @@
     <div class="chart-container">
         <div id="distribution-chart"></div>
     </div>
+    {% if tax_chart %}
+    <div class="chart-container">
+        <div id="tax-chart"></div>
+    </div>
+    {% endif %}
+    {% if lorenz_chart %}
+    <div class="chart-container">
+        <div id="lorenz-chart"></div>
+    </div>
+    {% endif %}
 </div>
 
 <script>
     Plotly.newPlot('gini-chart', JSON.parse('{{ gini_chart | safe }}').data, JSON.parse('{{ gini_chart | safe }}').layout, {responsive: true});
     Plotly.newPlot('metrics-chart', JSON.parse('{{ metrics_chart | safe }}').data, JSON.parse('{{ metrics_chart | safe }}').layout, {responsive: true});
     Plotly.newPlot('distribution-chart', JSON.parse('{{ distribution_chart | safe }}').data, JSON.parse('{{ distribution_chart | safe }}').layout, {responsive: true});
+    {% if tax_chart %}
+    Plotly.newPlot('tax-chart', JSON.parse('{{ tax_chart | safe }}').data, JSON.parse('{{ tax_chart | safe }}').layout, {responsive: true});
+    {% endif %}
+    {% if lorenz_chart %}
+    Plotly.newPlot('lorenz-chart', JSON.parse('{{ lorenz_chart | safe }}').data, JSON.parse('{{ lorenz_chart | safe }}').layout, {responsive: true});
+    {% endif %}
 </script>
 {% else %}
 <div class="no-results">

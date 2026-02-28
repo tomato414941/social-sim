@@ -86,6 +86,64 @@ header h1 {
     border-color: #3498db;
 }
 
+.controls h3 {
+    color: #2c3e50;
+    font-size: 1rem;
+    margin: 25px 0 15px 0;
+    padding-top: 15px;
+    border-top: 1px solid #ecf0f1;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    cursor: pointer;
+}
+
+.income-options,
+.tax-options {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.hint {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin-top: 5px;
+}
+
+.tax-brackets {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bracket {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bracket span {
+    width: 60px;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+.bracket input {
+    width: 70px !important;
+    padding: 6px 8px;
+    text-align: right;
+}
+
 .form-actions {
     display: flex;
     gap: 10px;
